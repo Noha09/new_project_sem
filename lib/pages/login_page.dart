@@ -44,13 +44,17 @@ class _LoginState extends State<Login> {
             ),
             ElevatedButton(
               onPressed: () async {
-                bool isAuthenticated = await authenticateUser(
+                String? userId = await authenticateUser(
                   nameController.text,
                   passwordController.text,
                 );
-
-                if (isAuthenticated) {
-                  Navigator.pushReplacementNamed(context, '/home'); // Redirige a la página principal
+                
+                if (userId != null) {
+                  Navigator.pushReplacementNamed(
+                    context,
+                    '/home',
+                    arguments: userId, // Pasamos el ID del usuario como argumento
+                  );
                 } else {
                   setState(() {
                     errorMessage = 'Usuario o contraseña incorrectos';
