@@ -65,10 +65,7 @@ Future<List> getPeticionesByUserId(String userId) async {
       .where('persona', isEqualTo: userId)
       .get();
 
-  print('Documentos encontrados: ${queryPeticiones.docs.length}'); // Imprime la cantidad de documentos encontrados
-
-  queryPeticiones.docs.forEach((documento) {
-    print('Documento encontrado: ${documento.data()}'); // Muestra el contenido de cada documento
+  queryPeticiones.docs.forEach((documento) {// Muestra el contenido de cada documento
     peticiones.add(documento.data());
   });
 

@@ -42,7 +42,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       body: TabBarView(
         controller: _tabController,
         children: [
-          // Pestaña 1: Todas las peticiones
           FutureBuilder(
             future: getPeticiones(),
             builder: (context, snapshot) {
