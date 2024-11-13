@@ -186,7 +186,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await Navigator.pushNamed(context, '/peticion');
+          await Navigator.pushNamed(
+            context, 
+            '/create', 
+            arguments: userId
+          );
           setState(() {}); // Refresca la pantalla cuando se vuelva
         },
         child: const Icon(Icons.add),

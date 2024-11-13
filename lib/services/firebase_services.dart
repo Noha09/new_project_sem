@@ -72,12 +72,12 @@ Future<List> getPeticionesByUserId(String userId) async {
   return peticiones;
 }
 
-Future<void> savePeticionies(String peticion, String persona) async {
+Future<void> savePeticionies(String peticion, String userId) async {
   String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
   await db.collection('peticiones').add({
     "peticion": peticion, 
-    "persona": persona, 
+    "persona": userId, 
     "fecha": formattedDate,
     "cumplida": false
   });

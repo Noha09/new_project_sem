@@ -1,3 +1,4 @@
+import 'package:crudfluter/pages/form_peticiones.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -26,7 +27,8 @@ class MainApp extends StatelessWidget {
       routes: {
         '/home': (context) => const Home(),
         '/register': (context) => const Register(),
-        '/': (context) => const Login()
+        '/': (context) => const Login(),
+        '/create': (context) => const Peticiones()
       },
     );
   }

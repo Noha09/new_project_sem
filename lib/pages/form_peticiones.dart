@@ -13,6 +13,8 @@ class _PeticionesState extends State<Peticiones> {
 
   @override
   Widget build(BuildContext context) {
+    final userId = ModalRoute.of(context)!.settings.arguments as String;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Peticiones'),
@@ -27,14 +29,18 @@ class _PeticionesState extends State<Peticiones> {
               TextField(
                 controller: peticionController,
                 decoration: const InputDecoration(
-                  hintText: 'Enter Name',
+                  hintText: 'Enter Your Petition',
                 ),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  await savePeticionies(peticionController.text, '').then((_) {
-                    Navigator.pushReplacementNamed(context, '/');
+                  await savePeticionies(peticionController.text, userId).then((_) {
+                    Navigator.pushReplacementNamed(
+                      context, 
+                      '/home', 
+                      arguments: userId
+                    );
                   });
                 },
                 child: const Text('Save'),
