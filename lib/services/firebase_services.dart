@@ -23,16 +23,23 @@ Future<String?> authenticateUser(String name, String password) async {
   }
 }
 
-Future<List> getPeople() async {
-  List people = [];
-  CollectionReference collectionReferencePeolpe = db.collection('people');
-  QuerySnapshot queryPeople = await collectionReferencePeolpe.get();
+Future<String> getUserNameById(String userId) async {
+  try {
+    DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        .collection('people')
+        .doc(userId)
+        .get();
 
-  queryPeople.docs.forEach((documento) {
-    people.add(documento.data());
-  });
-
-  return people;
+    if (userDoc.exists && userDoc.data() != null) {
+      final userData = userDoc.data() as Map<String, dynamic>;
+      return userData['name'] ?? 'anónimo'; // Retorna el nombre o "anónimo" si no está el campo
+    } else {
+      return 'anónimo'; // Si no existe el documento o está vacío, retorna "anónimo"
+    }
+  } catch (e) {
+    print("Error al obtener el nombre del usuario: $e");
+    return 'anónimo'; // En caso de error, también retorna "anónimo"
+  }
 }
 
 Future<void> savePeople(String name, String password) async {

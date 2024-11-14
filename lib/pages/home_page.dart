@@ -85,6 +85,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         itemCount: snapshot.data?.length,
                         itemBuilder: (context, index) {
                           final peticionData = snapshot.data?[index];
+                          final userId = peticionData['persona'];
                           final fechaString = peticionData['fecha'];
                           final peticion = peticionData['peticion'];
                           final cumplida = peticionData['cumplida'];
@@ -100,49 +101,73 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           final fechaFormateada =
                               DateFormat('dd/MM/yyyy').format(fecha);
 
-                          return Card(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 16.0),
-                            elevation: 4,
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                          return FutureBuilder<String>(
+                            future: getUserNameById(userId),
+                            builder: (context, userSnapshot) {
+                              if (userSnapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+
+                              final userName =
+                                  userSnapshot.data ?? 'anónimo';
+
+                              return Card(
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 16.0),
+                                elevation: 4,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Fecha: $fechaFormateada',
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          Icon(
+                                            cumplida
+                                                ? Icons.check_circle
+                                                : Icons.cancel,
+                                            color: cumplida
+                                                ? Colors.green
+                                                : Colors.red,
+                                            size: 20,
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10),
                                       Text(
-                                        'Fecha: $fechaFormateada',
+                                        peticion,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        'Solicitado por: $userName',
                                         style: const TextStyle(
                                           fontSize: 14,
-                                          fontWeight: FontWeight.w500,
                                           color: Colors.grey,
                                         ),
                                       ),
-                                      Icon(
-                                        cumplida
-                                            ? Icons.check_circle
-                                            : Icons.cancel,
-                                        color: cumplida
-                                            ? Colors.green
-                                            : Colors.red,
-                                        size: 20,
-                                      ),
                                     ],
                                   ),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    peticion,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                                ),
+                              );
+                            },
                           );
                         },
                       );
@@ -216,6 +241,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Solicitado por: $userId', // Mostrar el propio nombre del usuario
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey,
                                     ),
                                   ),
                                 ],
