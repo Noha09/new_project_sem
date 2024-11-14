@@ -253,8 +253,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           ),
         ),
         trailing: Icon(
-          cumplida ? Icons.check_circle : Icons.cancel,
-          color: cumplida ? Colors.green : Colors.red,
+          cumplida ? Icons.check_circle : Icons.check_circle,
+          color: cumplida ? Colors.green : Colors.grey,
           size: 28,
         ),
       ),
