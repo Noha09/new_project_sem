@@ -10,6 +10,7 @@ class Peticiones extends StatefulWidget {
 
 class _PeticionesState extends State<Peticiones> {
   TextEditingController peticionController = TextEditingController(text: "");
+  bool isAnonymous = false; // Variable para verificar si es anónimo
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +28,13 @@ class _PeticionesState extends State<Peticiones> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: const [
-                  SizedBox(height: 5), // Espacio desde la parte superior
+                  SizedBox(height: 5),
                   Text(
                     'CONEXIÓN',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFFFFC107), // Color amarillo
+                      color: Color(0xFFFFC107),
                     ),
                   ),
                   Text(
@@ -44,11 +45,11 @@ class _PeticionesState extends State<Peticiones> {
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(height: 10), // Espacio adicional debajo del logo
+                  SizedBox(height: 10),
                 ],
               ),
-
-              // Título o mensaje de bienvenida
+              
+              // Título y mensaje
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: const [
@@ -71,7 +72,7 @@ class _PeticionesState extends State<Peticiones> {
                 ],
               ),
 
-              // Campo de texto para ingresar la petición
+              // Campo de texto para la petición
               TextField(
                 controller: peticionController,
                 decoration: InputDecoration(
@@ -81,8 +82,20 @@ class _PeticionesState extends State<Peticiones> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   filled: true,
-                  fillColor: Colors.grey[200], // Usando un icono existente
+                  fillColor: Colors.grey[200],
                 ),
+              ),
+              const SizedBox(height: 20),
+
+              // Switch para elegir entre público o anónimo
+              SwitchListTile(
+                title: const Text("Enviar como anónimo"),
+                value: isAnonymous,
+                onChanged: (bool value) {
+                  setState(() {
+                    isAnonymous = value;
+                  });
+                },
               ),
               const SizedBox(height: 20),
 
@@ -92,14 +105,15 @@ class _PeticionesState extends State<Peticiones> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    backgroundColor: const Color(0xFFFFC107), // Color amarillo
+                    backgroundColor: const Color(0xFFFFC107),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                     elevation: 5,
                   ),
                   onPressed: () async {
-                    await savePeticionies(peticionController.text, userId)
+                    final idToSend = isAnonymous ? "anónimo" : userId;
+                    await savePeticionies(peticionController.text, idToSend)
                         .then((_) {
                       Navigator.pushReplacementNamed(context, '/home',
                           arguments: userId);
