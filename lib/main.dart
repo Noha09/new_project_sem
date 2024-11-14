@@ -8,6 +8,7 @@ import 'package:crudfluter/pages/home_page.dart';
 import 'package:crudfluter/pages/login_page.dart';
 import 'package:crudfluter/pages/register_page.dart';
 import 'package:crudfluter/pages/index.dart';
+import 'package:crudfluter/pages/testimonios.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +31,8 @@ class MainApp extends StatelessWidget {
         '/register': (context) => const Register(),
         '/': (context) => const Login(),
         '/create': (context) => const Peticiones(),
-        '/index': (context) => const IndexPage()
+        '/index': (context) => const IndexPage(),
+        '/testimonios': (context) =>  TestimoniosPage()
       },
     );
   }

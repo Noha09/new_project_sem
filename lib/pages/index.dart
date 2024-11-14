@@ -121,6 +121,16 @@ class IndexPage extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 20),
+              _buildOptionCard(
+                icon: Icons.comment,
+                title: 'Testimonios',
+                description:
+                    'Comparte cómo la oración ha tocado tu vida y encuentra inspiración en las experiencias de otros.',
+                color: Colors.lightBlue,
+                onTap: () {
+                  Navigator.pushNamed(context, '/testimonios', arguments: {'userId': userId});
+                },
+              ),
             ],
           ),
         ),
