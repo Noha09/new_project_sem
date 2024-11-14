@@ -114,7 +114,6 @@ Future<void> savePeticionies(String peticion, String userId) async {
   });
 }
 
-Future<void> updatePeticionStatus(String peticionId, status) async {
-  print(status);
-  print(peticionId);
+Future<void> updatePeticionStatus(String peticionId, bool status) async {
+  await db.collection('peticiones').doc(peticionId).update({ "cumplida":status });
 }
