@@ -16,9 +16,7 @@ class _PeticionesState extends State<Peticiones> {
     final userId = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Formulario de peticiones')
-      ),
+      appBar: AppBar(title: const Text('Formulario de peticiones')),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -101,12 +99,10 @@ class _PeticionesState extends State<Peticiones> {
                     elevation: 5,
                   ),
                   onPressed: () async {
-                    await savePeticionies(peticionController.text, userId).then((_) {
-                      Navigator.pushReplacementNamed(
-                        context, 
-                        '/home', 
-                        arguments: userId
-                      );
+                    await savePeticionies(peticionController.text, userId)
+                        .then((_) {
+                      Navigator.pushReplacementNamed(context, '/home',
+                          arguments: userId);
                     });
                   },
                   child: const Text(

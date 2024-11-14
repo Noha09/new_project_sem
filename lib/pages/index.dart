@@ -5,6 +5,8 @@ class IndexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userId = ModalRoute.of(context)!.settings.arguments as String;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -35,7 +37,7 @@ class IndexPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20), // Espacio debajo del header
-              
+
               // Card for "Versículo del Día"
               Card(
                 shape: RoundedRectangleBorder(
@@ -73,16 +75,18 @@ class IndexPage extends StatelessWidget {
                   ),
                 ),
               ),
-              
               const SizedBox(height: 20),
 
-              // Option cards
+              // Option cards with navigation actions
               _buildOptionCard(
                 icon: Icons.format_list_bulleted,
                 title: 'Lista de peticiones',
                 description:
                     'Descubre las peticiones y agradecimientos de nuestra comunidad. Únete en oración y apoyo para quienes lo necesitan.',
                 color: Colors.lightBlue,
+                onTap: () {
+                  Navigator.pushNamed(context, '/home', arguments: userId);
+                },
               ),
               const SizedBox(height: 10),
               _buildOptionCard(
@@ -91,11 +95,11 @@ class IndexPage extends StatelessWidget {
                 description:
                     'Un espacio para compartir tus peticiones y agradecimientos en comunidad.',
                 color: Colors.lightBlue,
+                onTap: () {
+                  Navigator.pushNamed(context, '/create', arguments: userId);
+                },
               ),
-
               const SizedBox(height: 20),
-
-              // Bottom cards for "Testimonios" and "Mis favoritos"
             ],
           ),
         ),
@@ -103,59 +107,55 @@ class IndexPage extends StatelessWidget {
     );
   }
 
-  // Helper function for the option cards
-  // Helper function for the option cards
-// Helper function for the option cards
-Widget _buildOptionCard({
-  required IconData icon,
-  required String title,
-  required String description,
-  required Color color,
-}) {
-  return Card(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(15.0),
-    ),
-    elevation: 2,
-    child: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        children: [
-          Icon(icon, color: Colors.black, size: 30),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: color,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  description,
-                  style: const TextStyle(color: Colors.black54),
-                ),
-              ],
-            ),
-          ),
-          // Button with the arrow icon, no background or border
-          TextButton(
-            onPressed: () {
-              // Acción del botón
-            },
-            style: TextButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              foregroundColor: Colors.lightBlue, // Color del ícono
-            ),
-            child: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue),
-          ),
-        ],
+  // Helper function for the option cards with navigation
+  Widget _buildOptionCard({
+    required IconData icon,
+    required String title,
+    required String description,
+    required Color color,
+    required VoidCallback onTap, // Añadimos el parámetro onTap
+  }) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
       ),
-    ),
-  );
-}
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Icon(icon, color: Colors.black, size: 30),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: color,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    description,
+                    style: const TextStyle(color: Colors.black54),
+                  ),
+                ],
+              ),
+            ),
+            TextButton(
+              onPressed: onTap, // Utilizamos el onTap recibido
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                foregroundColor: Colors.lightBlue, // Color del ícono
+              ),
+              child: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

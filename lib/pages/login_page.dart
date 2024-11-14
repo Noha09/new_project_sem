@@ -49,15 +49,15 @@ class _LoginState extends State<Login> {
               const SizedBox(height: 40),
               // Título de Iniciar Sesión
               const Center(
-  child: Text(
-    'Iniciar Sesión',
-    style: TextStyle(
-      fontSize: 32,
-      fontWeight: FontWeight.bold,
-      color: Colors.black87,
-    ),
-  ),
-),
+                child: Text(
+                  'Iniciar Sesión',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
               const SizedBox(height: 10),
               const Text(
                 '¡Bienvenido! Inicia sesión para acceder a tus peticiones y agradecimientos.',
@@ -124,7 +124,7 @@ class _LoginState extends State<Login> {
                       print('Redirigiendo a Home con userId: $userId');
                       Navigator.pushReplacementNamed(
                         context,
-                        '/home',
+                        '/index',
                         arguments: userId,
                       );
                     } else {
