@@ -7,6 +7,7 @@ import 'firebase_options.dart';
 import 'package:crudfluter/pages/home_page.dart';
 import 'package:crudfluter/pages/login_page.dart';
 import 'package:crudfluter/pages/register_page.dart';
+import 'package:crudfluter/pages/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,8 @@ class MainApp extends StatelessWidget {
         '/home': (context) => const Home(),
         '/register': (context) => const Register(),
         '/': (context) => const Login(),
-        '/create': (context) => const Peticiones()
+        '/create': (context) => const Peticiones(),
+        '/index': (context) => const IndexPage()
       },
     );
   }
