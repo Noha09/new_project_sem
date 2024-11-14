@@ -14,7 +14,10 @@ class _PeticionesState extends State<Peticiones> {
 
   @override
   Widget build(BuildContext context) {
-    final userId = ModalRoute.of(context)!.settings.arguments as String;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final userId = args['userId'] as String;
+    final role = args['rol'] as String;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Formulario de peticiones')),
@@ -111,7 +114,7 @@ class _PeticionesState extends State<Peticiones> {
                     await savePeticionies(peticionController.text, idToSend)
                         .then((_) {
                       Navigator.pushReplacementNamed(context, '/home',
-                          arguments: userId);
+                          arguments: {'userId': userId, 'rol': role});
                     });
                   },
                   child: const Text(

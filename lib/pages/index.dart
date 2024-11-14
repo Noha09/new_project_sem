@@ -5,11 +5,34 @@ class IndexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final userId = args['userId'] as String;
     final role = args['rol'] as String;
 
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.person, color: Colors.black),
+          onPressed: () {
+            // Navegar a la página de perfil
+            Navigator.pushNamed(context, '/profile',
+                arguments: {'userId': userId, 'rol': role});
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout, color: Colors.black),
+            onPressed: () {
+              // Aquí puedes añadir la lógica para cerrar sesión
+              Navigator.pushReplacementNamed(context, '/');
+            },
+          ),
+          const SizedBox(
+              width:
+                  8), // Añadir un pequeño espacio entre los iconos y el borde derecho
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -38,7 +61,6 @@ class IndexPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
@@ -76,7 +98,6 @@ class IndexPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
               _buildOptionCard(
                 icon: Icons.format_list_bulleted,
                 title: 'Lista de peticiones',
@@ -84,7 +105,8 @@ class IndexPage extends StatelessWidget {
                     'Descubre las peticiones y agradecimientos de nuestra comunidad. Únete en oración y apoyo para quienes lo necesitan.',
                 color: Colors.lightBlue,
                 onTap: () {
-                  Navigator.pushNamed(context, '/home', arguments: {'userId': userId, 'rol': role});
+                  Navigator.pushNamed(context, '/home',
+                      arguments: {'userId': userId, 'rol': role});
                 },
               ),
               const SizedBox(height: 10),
@@ -95,7 +117,7 @@ class IndexPage extends StatelessWidget {
                     'Un espacio para compartir tus peticiones y agradecimientos en comunidad.',
                 color: Colors.lightBlue,
                 onTap: () {
-                  Navigator.pushNamed(context, '/create', arguments: userId);
+                  Navigator.pushNamed(context, '/create', arguments: {'userId': userId, 'rol': role});
                 },
               ),
               const SizedBox(height: 20),
@@ -106,13 +128,12 @@ class IndexPage extends StatelessWidget {
     );
   }
 
-  Widget _buildOptionCard({
-    required IconData icon,
-    required String title,
-    required String description,
-    required Color color,
-    required VoidCallback onTap
-  }) {
+  Widget _buildOptionCard(
+      {required IconData icon,
+      required String title,
+      required String description,
+      required Color color,
+      required VoidCallback onTap}) {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
@@ -144,12 +165,14 @@ class IndexPage extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: onTap, 
+              onPressed: onTap,
               style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 foregroundColor: Colors.lightBlue,
               ),
-              child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue),
+              child:
+                  const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue),
             ),
           ],
         ),
