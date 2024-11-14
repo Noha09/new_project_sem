@@ -23,9 +23,9 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // Logo o título en la parte superior
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children: [
                   SizedBox(height: 1), // Espacio desde la parte superior
                   Text(
                     'CONEXIÓN',
@@ -121,7 +121,6 @@ class _LoginState extends State<Login> {
                     );
 
                     if (userId != null) {
-                      print('Redirigiendo a Home con userId: $userId');
                       Navigator.pushReplacementNamed(
                         context,
                         '/index',

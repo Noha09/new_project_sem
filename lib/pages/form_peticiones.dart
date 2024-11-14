@@ -25,9 +25,9 @@ class _PeticionesState extends State<Peticiones> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // Encabezado de Conexión FITEC
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children: [
                   SizedBox(height: 5),
                   Text(
                     'CONEXIÓN',
@@ -50,9 +50,9 @@ class _PeticionesState extends State<Peticiones> {
               ),
               
               // Título y mensaje
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children: [
                   SizedBox(height: 40),
                   Text(
                     'Peticiones',

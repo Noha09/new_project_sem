@@ -15,8 +15,8 @@ class IndexPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // "CONEXIÓN FITEC" header
-              Column(
-                children: const [
+              const Column(
+                children: [
                   SizedBox(height: 40), // Espacio desde la parte superior
                   Text(
                     'CONEXIÓN',
@@ -44,11 +44,11 @@ class IndexPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 elevation: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Row(
                         children: [
                           Icon(Icons.sunny, color: Colors.black),
@@ -151,7 +151,7 @@ class IndexPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 foregroundColor: Colors.lightBlue, // Color del ícono
               ),
-              child: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue),
+              child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue),
             ),
           ],
         ),

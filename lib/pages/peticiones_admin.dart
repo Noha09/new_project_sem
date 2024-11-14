@@ -62,7 +62,6 @@ class _PeticionesAdminState extends State<PeticionesAdmin> {
               itemCount: peticionesData.length,
               itemBuilder: (context, index) {
                 final peticion = peticionesData[index];
-                final peticionId = peticion['id']; // ID de la petición
                 final peticionText = peticion['texto']; // Texto de la petición
                 final completada = peticion['completada']; // Estado de la petición
 
