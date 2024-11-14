@@ -15,7 +15,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this); // Dos pestañas
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -113,7 +113,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
 
           FutureBuilder(
-            future: getPeticionesByUserId(userId), // Llamada filtrada por userId
+            future: getPeticionesByUserId(userId),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(
@@ -191,7 +191,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             '/create', 
             arguments: userId
           );
-          setState(() {}); // Refresca la pantalla cuando se vuelva
+          setState(() {});
         },
         child: const Icon(Icons.add),
       ),

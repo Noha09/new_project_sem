@@ -21,10 +21,10 @@ class _PeticionesState extends State<Peticiones> {
       ),
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20.0), // Aumentamos el padding para mayor margen
+          padding: const EdgeInsets.all(20.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Centra los elementos verticalmente
-            crossAxisAlignment: CrossAxisAlignment.stretch, // Hace que el ancho ocupe toda la pantalla
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextField(
                 controller: peticionController,

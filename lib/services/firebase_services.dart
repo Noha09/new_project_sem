@@ -13,14 +13,13 @@ Future<String?> authenticateUser(String name, String password) async {
         .get();
     
     if (querySnapshot.docs.isNotEmpty) {
-      // Obtén el ID del primer documento que coincida con los criterios
       return querySnapshot.docs.first.id;
     } else {
-      return null; // No se encontró ningún usuario
+      return null;
     }
   } catch (e) {
     print('Error al autenticar usuario: $e');
-    return null; // En caso de error, retorna null
+    return null;
   }
 }
 
@@ -41,6 +40,7 @@ Future<void> savePeople(String name, String password) async {
     "id": 3,
     "name": name, 
     "password": password, 
+    "rol": "user",
     "status": "active"
   });
 }
@@ -65,7 +65,7 @@ Future<List> getPeticionesByUserId(String userId) async {
       .where('persona', isEqualTo: userId)
       .get();
 
-  queryPeticiones.docs.forEach((documento) {// Muestra el contenido de cada documento
+  queryPeticiones.docs.forEach((documento) {
     peticiones.add(documento.data());
   });
 

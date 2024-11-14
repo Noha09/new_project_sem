@@ -32,7 +32,7 @@ class _LoginState extends State<Login> {
             ),
             TextField(
               controller: passwordController,
-              obscureText: true, // Oculta el texto para el campo de contraseña
+              obscureText: true,
               decoration: const InputDecoration(
                 hintText: 'Enter Password',
               ),
@@ -53,7 +53,7 @@ class _LoginState extends State<Login> {
                   Navigator.pushReplacementNamed(
                     context,
                     '/home',
-                    arguments: userId, // Pasamos el ID del usuario como argumento
+                    arguments: userId,
                   );
                 } else {
                   setState(() {
@@ -66,7 +66,7 @@ class _LoginState extends State<Login> {
             const SizedBox(height: 20),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/register'); // Navega a la página de registro
+                Navigator.pushNamed(context, '/register');
               },
               child: const Text('No tienes una cuenta? Regístrate aquí'),
             ),
