@@ -15,7 +15,7 @@ Future<Map<String, dynamic>?> authenticateUser(String name, String password) asy
     if (querySnapshot.docs.isNotEmpty) {
       final userDoc = querySnapshot.docs.first;
       final userId = userDoc.id;
-      final userRole = userDoc['rol'] ?? 'user'; // Asigna 'user' como rol predeterminado si no está definido
+      final userRole = userDoc['rol'] ?? 'user';
       return {
         'id': userId,
         'rol': userRole,
@@ -38,13 +38,13 @@ Future<String> getUserNameById(String userId) async {
 
     if (userDoc.exists && userDoc.data() != null) {
       final userData = userDoc.data() as Map<String, dynamic>;
-      return userData['name'] ?? 'anónimo'; // Retorna el nombre o "anónimo" si no está el campo
+      return userData['name'] ?? 'anónimo';
     } else {
-      return 'anónimo'; // Si no existe el documento o está vacío, retorna "anónimo"
+      return 'anónimo';
     }
   } catch (e) {
     print("Error al obtener el nombre del usuario: $e");
-    return 'anónimo'; // En caso de error, también retorna "anónimo"
+    return 'anónimo';
   }
 }
 
@@ -66,6 +66,24 @@ Future<List> getPeticiones() async {
   queryPeticiones.docs.forEach((documento) {
     peticiones.add(documento.data());
   });
+
+  return peticiones;
+}
+
+Future<List<Map<String, dynamic>>> getPeticionesPorCumplida(bool status) async {
+  List<Map<String, dynamic>> peticiones = [];
+  CollectionReference collectionReferencePeticiones = db.collection('peticiones');
+
+  QuerySnapshot queryPeticiones = await collectionReferencePeticiones
+      .where('cumplida', isEqualTo: status)
+      .get();
+  
+  for (var documento in queryPeticiones.docs) {
+    // Añade el ID del documento a los datos del mapa
+    Map<String, dynamic> peticionData = documento.data() as Map<String, dynamic>;
+    peticionData['id'] = documento.id; // Incluye el ID en el mapa
+    peticiones.add(peticionData);
+  }
 
   return peticiones;
 }
@@ -94,4 +112,9 @@ Future<void> savePeticionies(String peticion, String userId) async {
     "fecha": formattedDate,
     "cumplida": false
   });
+}
+
+Future<void> updatePeticionStatus(String peticionId, status) async {
+  print(status);
+  print(peticionId);
 }
