@@ -30,7 +30,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final userId = ModalRoute.of(context)!.settings.arguments as String;
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final userId = args['userId'] as String;
+    final role = args['rol'] as String;
 
     return Scaffold(
       appBar: AppBar(
@@ -71,12 +73,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           const SizedBox(height: 20),
 
-          // TabBarView con scroll
           Expanded(
             child: TabBarView(
               controller: _tabController,
               children: [
-                // Pestaña 1: Todas las Peticiones
                 FutureBuilder(
                   future: getPeticiones(),
                   builder: (context, snapshot) {
@@ -179,7 +179,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   },
                 ),
 
-                // Pestaña 2: Mis Peticiones
                 FutureBuilder(
                   future: getPeticionesByUserId(userId),
                   builder: (context, snapshot) {
@@ -245,7 +244,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   ),
                                   const SizedBox(height: 10),
                                   Text(
-                                    'Solicitado por: $userId', // Mostrar el propio nombre del usuario
+                                    'Solicitado por: $userId',
                                     style: const TextStyle(
                                       fontSize: 14,
                                       color: Colors.grey,

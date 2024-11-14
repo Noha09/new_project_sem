@@ -28,13 +28,13 @@ class _RegisterState extends State<Register> {
               const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 1), // Espacio desde la parte superior
+                  SizedBox(height: 1),
                   Text(
                     'CONEXIÓN',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFFFFC107), // Color amarillo
+                      color: Color(0xFFFFC107),
                     ),
                   ),
                   Text(
@@ -45,7 +45,7 @@ class _RegisterState extends State<Register> {
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(height: 10), // Espacio adicional debajo del logo
+                  SizedBox(height: 10),
                 ],
               ),
               const SizedBox(height: 40),
@@ -66,7 +66,6 @@ class _RegisterState extends State<Register> {
               ),
               const SizedBox(height: 40),
               
-              // Campo de nombre de usuario
               TextField(
                 controller: nameController,
                 decoration: InputDecoration(
@@ -82,7 +81,6 @@ class _RegisterState extends State<Register> {
               ),
               const SizedBox(height: 15),
               
-              // Campo de contraseña
               TextField(
                 controller: passwordController,
                 obscureText: true,
@@ -99,7 +97,6 @@ class _RegisterState extends State<Register> {
               ),
               const SizedBox(height: 20),
 
-              // Botón de registro
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(

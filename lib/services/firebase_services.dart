@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
-Future<String?> authenticateUser(String name, String password) async {
+Future<Map<String, dynamic>?> authenticateUser(String name, String password) async {
   try {
     final querySnapshot = await db
         .collection('people')
@@ -11,9 +11,15 @@ Future<String?> authenticateUser(String name, String password) async {
         .where('password', isEqualTo: password)
         .where('status', isEqualTo: 'active')
         .get();
-    
+
     if (querySnapshot.docs.isNotEmpty) {
-      return querySnapshot.docs.first.id;
+      final userDoc = querySnapshot.docs.first;
+      final userId = userDoc.id;
+      final userRole = userDoc['rol'] ?? 'user'; // Asigna 'user' como rol predeterminado si no está definido
+      return {
+        'id': userId,
+        'rol': userRole,
+      };
     } else {
       return null;
     }

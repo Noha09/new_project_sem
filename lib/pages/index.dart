@@ -5,7 +5,9 @@ class IndexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userId = ModalRoute.of(context)!.settings.arguments as String;
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final userId = args['userId'] as String;
+    final role = args['rol'] as String;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -14,16 +16,15 @@ class IndexPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // "CONEXIÓN FITEC" header
               const Column(
                 children: [
-                  SizedBox(height: 40), // Espacio desde la parte superior
+                  SizedBox(height: 40),
                   Text(
                     'CONEXIÓN',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFFFFC107), // Color amarillo
+                      color: Color(0xFFFFC107),
                     ),
                   ),
                   Text(
@@ -36,9 +37,8 @@ class IndexPage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 20), // Espacio debajo del header
+              const SizedBox(height: 20),
 
-              // Card for "Versículo del Día"
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
@@ -77,7 +77,6 @@ class IndexPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Option cards with navigation actions
               _buildOptionCard(
                 icon: Icons.format_list_bulleted,
                 title: 'Lista de peticiones',
@@ -85,7 +84,7 @@ class IndexPage extends StatelessWidget {
                     'Descubre las peticiones y agradecimientos de nuestra comunidad. Únete en oración y apoyo para quienes lo necesitan.',
                 color: Colors.lightBlue,
                 onTap: () {
-                  Navigator.pushNamed(context, '/home', arguments: userId);
+                  Navigator.pushNamed(context, '/home', arguments: {'userId': userId, 'rol': role});
                 },
               ),
               const SizedBox(height: 10),
@@ -107,13 +106,12 @@ class IndexPage extends StatelessWidget {
     );
   }
 
-  // Helper function for the option cards with navigation
   Widget _buildOptionCard({
     required IconData icon,
     required String title,
     required String description,
     required Color color,
-    required VoidCallback onTap, // Añadimos el parámetro onTap
+    required VoidCallback onTap
   }) {
     return Card(
       shape: RoundedRectangleBorder(
@@ -146,10 +144,10 @@ class IndexPage extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: onTap, // Utilizamos el onTap recibido
+              onPressed: onTap, 
               style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                foregroundColor: Colors.lightBlue, // Color del ícono
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                foregroundColor: Colors.lightBlue,
               ),
               child: const Icon(Icons.arrow_forward_ios, color: Colors.lightBlue),
             ),

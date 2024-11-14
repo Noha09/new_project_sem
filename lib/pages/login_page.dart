@@ -22,17 +22,16 @@ class _LoginState extends State<Login> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Logo o título en la parte superior
               const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 1), // Espacio desde la parte superior
+                  SizedBox(height: 1),
                   Text(
                     'CONEXIÓN',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFFFFC107), // Color amarillo
+                      color: Color(0xFFFFC107),
                     ),
                   ),
                   Text(
@@ -43,11 +42,10 @@ class _LoginState extends State<Login> {
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(height: 80), // Espacio adicional debajo del logo
+                  SizedBox(height: 80),
                 ],
               ),
               const SizedBox(height: 40),
-              // Título de Iniciar Sesión
               const Center(
                 child: Text(
                   'Iniciar Sesión',
@@ -65,7 +63,6 @@ class _LoginState extends State<Login> {
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 40),
-              // Campo de nombre de usuario
               TextField(
                 controller: nameController,
                 decoration: InputDecoration(
@@ -80,7 +77,6 @@ class _LoginState extends State<Login> {
                 ),
               ),
               const SizedBox(height: 15),
-              // Campo de contraseña
               TextField(
                 controller: passwordController,
                 obscureText: true,
@@ -96,35 +92,36 @@ class _LoginState extends State<Login> {
                 ),
               ),
               const SizedBox(height: 20),
-              // Mensaje de error
               Text(
                 errorMessage,
                 style: const TextStyle(color: Colors.red, fontSize: 14),
               ),
               const SizedBox(height: 20),
-              // Botón de login
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    backgroundColor: const Color(0xFFFFC107), // Color amarillo
+                    backgroundColor: const Color(0xFFFFC107),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                     elevation: 5,
                   ),
                   onPressed: () async {
-                    String? userId = await authenticateUser(
+                    final authResult = await authenticateUser(
                       nameController.text,
                       passwordController.text,
                     );
 
-                    if (userId != null) {
+                    if (authResult != null) {
+                      final userId = authResult['id'];
+                      final userRole = authResult['rol'];
+
                       Navigator.pushReplacementNamed(
                         context,
                         '/index',
-                        arguments: userId,
+                        arguments: {'userId': userId, 'rol': userRole},
                       );
                     } else {
                       setState(() {
@@ -143,7 +140,6 @@ class _LoginState extends State<Login> {
                 ),
               ),
               const SizedBox(height: 20),
-              // Enlace de registro
               TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/register');

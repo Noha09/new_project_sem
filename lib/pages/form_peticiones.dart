@@ -10,7 +10,7 @@ class Peticiones extends StatefulWidget {
 
 class _PeticionesState extends State<Peticiones> {
   TextEditingController peticionController = TextEditingController(text: "");
-  bool isAnonymous = false; // Variable para verificar si es anónimo
+  bool isAnonymous = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,6 @@ class _PeticionesState extends State<Peticiones> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Encabezado de Conexión FITEC
               const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -49,7 +48,6 @@ class _PeticionesState extends State<Peticiones> {
                 ],
               ),
               
-              // Título y mensaje
               const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -72,7 +70,6 @@ class _PeticionesState extends State<Peticiones> {
                 ],
               ),
 
-              // Campo de texto para la petición
               TextField(
                 controller: peticionController,
                 decoration: InputDecoration(
@@ -87,7 +84,6 @@ class _PeticionesState extends State<Peticiones> {
               ),
               const SizedBox(height: 20),
 
-              // Switch para elegir entre público o anónimo
               SwitchListTile(
                 title: const Text("Enviar como anónimo"),
                 value: isAnonymous,
@@ -99,7 +95,6 @@ class _PeticionesState extends State<Peticiones> {
               ),
               const SizedBox(height: 20),
 
-              // Botón para guardar la petición
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
